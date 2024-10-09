@@ -1,0 +1,867 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@0,100;0,200;0,300;0,400&display=swap");
+
+/* cài đặt thanh trang chủ */
+body {
+  margin: 0; /* Xóa margin mặc định */
+  padding-top: 50px; /* Tạo khoảng cách cho nội dung bên dưới (điều chỉnh theo chiều cao của nav) */
+}
+
+.navbar {
+  position: fixed; /* Ghim thanh nav ở vị trí cố định */
+  width: 85%; /* Chiều rộng của thanh nav */
+  top: 10px; /* Vị trí từ đỉnh trang */
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Đảm bảo nav nằm trên các phần tử khác */
+  margin: 0 auto; /* Căn giữa thanh nav */
+  padding: 5px 10px; /* Khoảng cách bên trong nav */
+  background-color: #181822;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ */
+  display: flex; /* Sử dụng Flexbox cho nav */
+  justify-content: space-between; /* Đặt khoảng cách đều giữa các phần tử */
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+}
+
+.navbar-nav {
+  display: flex; /* Sử dụng Flexbox cho danh sách nav */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 20px; /* Khoảng cách giữa các liên kết */
+}
+
+.nav-item {
+  list-style: none; /* Xóa dấu chấm cho danh sách */
+}
+
+.nav-link {
+  text-decoration: none; /* Bỏ gạch chân */
+  padding: 8px 12px; /* Khoảng cách bên trong cho các thuộc tính */
+  color: #dfe5eb; /* Màu chữ */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền khi hover */
+}
+
+.nav-link:hover {
+  background-color: #2a3d50; /* Màu nền khi hover */
+}
+
+#logoutButton {
+  background-color: #181822;
+  margin-left: auto; /* Đẩy nút đăng xuất sang bên phải */
+  padding: 8px 12px; /* Đảm bảo nút có padding giống như các liên kết khác */
+}
+
+/* phần nội dung web */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/* Phần hình khối toàn web */
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #121213;
+
+  font-family: "Poppins", sans-serif;
+  display: grid;
+  place-items: center;
+}
+header {
+  position: relative;
+  width: 85%;
+  height: 100%;
+  /* border: 1px solid #fff; */
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+header .menu_side,
+.Song_side {
+  width: 25%;
+  height: 90%;
+  /* border: 1px solid #fff; */
+  background: #111727;
+  box-shadow: 5px 0px 2px #090f1f;
+  color: #fff;
+}
+header .Song_side {
+  width: 75%;
+  background-color: #0b1320;
+}
+header .master_play {
+  width: 100%;
+  height: 10%;
+  /* border: 1px solid #fff; */
+  background: #111727;
+  box-shadow: 8px 3px 8px #090f1f;
+}
+
+/* Phần chữ Playlist */
+
+header .menu_side h1 {
+  font-size: 20px;
+  margin: 15px 0px 0px 20px;
+  font-weight: 500;
+}
+header .menu_side .playlist {
+  margin: 40px 0px 0px 20px;
+}
+header .menu_side .playlist h4 {
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 10px;
+  color: #4c5262;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: 0.3s linear;
+}
+/* phần thẻ a */
+header .menu_side .playlist a {
+  text-decoration: none;
+  color: #4c5262;
+  transition: 0.3s linear;
+}
+
+header .menu_side .playlist #colorNhacTrung {
+  text-decoration: none;
+  color: #fff !important;
+  transition: 0.3s linear;
+  text-decoration: underline;
+  text-decoration-color: #fff; /* Màu gạch chân */
+  font-weight: 700;
+}
+
+header .menu_side .playlist a:hover {
+  color: #fff;
+}
+header .menu_side .playlist h4:hover {
+  color: #fff;
+}
+header .menu_side .playlist h4 span {
+  position: relative;
+  margin-right: 35px;
+}
+header .menu_side .playlist h4 span::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border: 2px solid #4c5262;
+  border-radius: 50%;
+  top: -4px;
+  transition: 0.3s linear;
+}
+header .menu_side .playlist h4 span::before {
+  border: 2px solid #fff;
+}
+
+header .menu_side .playlist h4 .bi {
+  display: none;
+}
+
+header .menu_side .playlist .active {
+  color: #36e2ec;
+}
+
+header .menu_side .playlist .active span {
+  display: none;
+}
+
+header .menu_side .playlist .active .bi {
+  display: flex;
+  margin-right: 20px;
+}
+/* Phần dễ sai , đây là phần cả cái box menu nhạc */
+header .menu_side .menu_song {
+  width: 90%;
+  height: 370px;
+  /* /* border-top: 1px solid #fff; */
+  border-bottom: 1px solid rgb(105, 105, 105, 0.1);
+  margin-top: 10px;
+  border-left: none;
+  border-right: none;
+  overflow: auto;
+}
+header .menu_side .menu_song::-webkit-scrollbar {
+  display: none;
+}
+/* Đây là phần list nhạc */
+header .menu_side .menu_song li {
+  list-style-type: none;
+  position: relative;
+  padding: 5px 0px 5px 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  /* phần đã sửa */
+  margin-left: 0px;
+  cursor: pointer;
+  transition: 0.3 linear;
+  background: rgb(105, 105, 105, 0.1);
+}
+/* làm cho phần list nhạc nhấp nhô khi nhấp */
+header .menu_side .menu_song li:hover {
+  background: rgb(105, 105, 105, 0.1);
+}
+/* Phần chữ List nhạc */
+header .menu_side .menu_song li span {
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: -18px;
+  color: #4c5262;
+}
+
+/* Phần ảnh list nhạc */
+header .menu_side .menu_song li img {
+  width: 32px;
+  height: 32px;
+  margin-left: 25px;
+}
+/* phần khung chữ của list nhạc  */
+header .menu_side .menu_song li h5 {
+  font-size: 11px;
+  margin-left: 15px;
+  width: 170px;
+  /* border: 1px solid #fff; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Phần tên ca sĩ */
+header .menu_side .menu_song li .subtitle {
+  font-size: 9px;
+  color: #4c5262;
+}
+header .menu_side .menu_song li .bi {
+  position: absolute;
+  right: 15px;
+}
+header .master_play {
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+/* Phần Đáy cái nhấp nhô dưới đáy */
+header .master_play .wave {
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid #fff; */
+  padding-bottom: 5px;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+header .master_play .wave .wave1 {
+  width: 3px;
+  height: 10px;
+  background: #36e2ec;
+  display: flex;
+  margin-right: 3px;
+  border-radius: 10px 10px 0px 0px;
+  animation: unset;
+}
+header .master_play .wave .wave1:nth-child(2) {
+  height: 13px;
+  margin-right: 3.5px;
+  animation-delay: 0.4s;
+}
+header .master_play .wave .wave1:nth-child(3) {
+  height: 8px;
+  animation-delay: 0.8s;
+}
+header .master_play .active1 .wave1 {
+  height: 8px;
+  animation-delay: 0.8s;
+}
+
+/* javascript classes */
+
+header .master_play .active1 .wave1 {
+  animation: wave 0.5s linear infinite;
+}
+header .master_play .active1 .wave1:nth-child(2) {
+  animation-delay: 0.4s;
+}
+header .master_play .active1 .wave1:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes wave {
+  0% {
+    height: 10px;
+  }
+  50% {
+    height: 15px;
+  }
+  100% {
+    height: 20px;
+  }
+}
+/* Phần ảnh ở đáy */
+header .master_play img {
+  width: 35px;
+  height: 35px;
+}
+/* Phần chữ ở đấy */
+header .master_play h5 {
+  width: 130px;
+  /* border: 1px solid #fff; */
+  margin-left: 15px;
+  color: #fff;
+  line-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+header .master_play h5 .subtitle {
+  font-size: 11px;
+  color: #4c5262;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Các icon bấm chuyển nhạc đã sửa khác phần margin */
+header .master_play .icon {
+  font-size: 20px;
+  color: #fff;
+  margin: 0px 20px 0px -10px;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+header .master_play .icon .bi {
+  color: pointer;
+  outline: none;
+}
+/* nút quay lại */
+header .master_play .icon .shuffle {
+  font-size: 17px;
+  margin-right: 10px;
+  width: 18px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+header .master_play .icon #dowload_music {
+  font-size: 20px;
+  margin-left: 10px;
+}
+header .master_play .icon .bi.wave1:nth-child(3) {
+  border: 1px solid rgb(105, 105, 105, 0.1);
+  border-radius: 50%;
+  padding: 1px 5px 0px 7px;
+  margin: 0px 5px;
+}
+header .master_play span {
+  color: #fff;
+  width: 32px;
+  /* border-radius: solid #fff; */
+  font-size: 11px;
+  font-weight: 400;
+}
+header .master_play #currentStart {
+  margin: 0px 0px 0px 20px;
+}
+/* //Thanh trượt */
+header .master_play .bar {
+  position: relative;
+  width: 43%;
+  height: 2px;
+  background: rgb(105, 105, 170, 0.1);
+  margin: 0px 15px 0px 10px;
+}
+header .master_play .bar .bar2 {
+  position: absolute;
+  background: #36e2ec;
+  width: 0%;
+  height: 100%;
+  top: 0;
+  transition: 1s linear;
+}
+header .master_play .bar .dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #36e2ec;
+  border-radius: 50%;
+  left: 0%;
+  top: -1.5px;
+  transition: 1s linear;
+}
+header .master_play .bar .dot::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #36e2ec;
+  border-radius: 50%;
+  left: -5px;
+  top: -6.5px;
+  box-shadow: inset 0px 0px 3px #36e2ec;
+}
+/* Độ dài thanh trượt */
+header .master_play .bar input {
+  position: absolute;
+  /* đây */
+  width: 100%;
+  top: -8px;
+  left: 0;
+  cursor: pointer;
+  z-index: 999999999999999999999999999999999999999999;
+  transition: 3s linear;
+  opacity: 0;
+}
+header .master_play .vol {
+  position: relative;
+  width: 100px;
+  /* dùng 2px cũng đc */
+  height: 2%;
+  background: #36e2ec;
+  margin-left: 50px;
+}
+/* phần hình cái loa  */
+header .master_play .vol .bi {
+  position: absolute;
+  color: #fff;
+  font-size: 25px;
+  top: -12px;
+  left: -40px;
+}
+header .master_play .vol input {
+  position: absolute;
+  width: 100%;
+  top: -6 px;
+  left: 0;
+  cursor: pointer;
+  z-index: 9999999999999999999999999999999999999999999;
+  opacity: 0;
+}
+
+header .master_play .vol voi_bar {
+  position: absolute;
+  background: #36e2ec;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transition: 1s linear;
+}
+
+header .master_play .vol .dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #36e2ec;
+  border-radius: 50%;
+  left: 100%;
+  top: -1.5px;
+  transition: 1s linear;
+}
+header .master_play .vol .dot::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #36e2ec;
+  border-radius: 50%;
+  left: -7px;
+  top: -6.5px;
+  box-shadow: inset 0px 0px 3px #36e2ec;
+}
+
+/* / Phần ảnh nên ở trang chủ */
+header .Song_side {
+  z-index: 2;
+}
+header .Song_side::before {
+  content: "";
+  position: absolute;
+  width: 600%;
+  height: 400px;
+  background-image: url("./imgbackgroud/Music\ 4.png");
+  z-index: -1;
+}
+/* Phần khối của discove mylibray radio */
+header .Song_side nav {
+  width: 90%;
+  height: 10%;
+  /* border: 1px solid #fff; */
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* /Phần chữ */
+header .Song_side nav ul {
+  display: flex;
+}
+header .Song_side nav ul li {
+  list-style: none;
+  position: relative;
+  font-size: 13px;
+  color: #4c5262;
+  margin-right: 25px;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+/* /phần di chuột qua thì sáng */
+header .Song_side nav ul li:hover {
+  color: #fff;
+}
+header .Song_side nav ul li:nth-child(1) {
+  color: #fff;
+}
+header .Song_side nav ul li span {
+  position: absolute;
+  width: 100%;
+  height: 2.5px;
+  background: #36e2ec;
+  bottom: -5px;
+  left: 0;
+  border-radius: 20px;
+}
+/* Khu vực tìm kiếm */
+header .Song_side nav .search {
+  position: relative;
+  width: 40%;
+  padding: 1px 10px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+header .Song_side nav .search::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(184, 184, 184, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+}
+
+/* Icon trong khu vực tìm kiếm */
+header .Song_side nav .search .bi {
+  font-size: 13px;
+  padding: 3px 0 0 10px;
+}
+
+/* Input trong khu vực tìm kiếm */
+header .Song_side nav .search input {
+  background-color: transparent; /* Thay none bằng transparent */
+  border: none;
+  outline: none;
+  padding: 0 9%;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Kết quả tìm kiếm */
+.search-results {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: scroll; /* Cho phép cuộn */
+  background-color: #2a3d50;
+  border-radius: 4px;
+  z-index: 100;
+  scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+}
+
+/* Item trong kết quả tìm kiếm */
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.search-result-item:hover {
+  background-color: rgb(105, 105, 105, 0.1);
+}
+
+/* Hình ảnh trong kết quả tìm kiếm */
+.search-result-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+/* Thông tin bài hát */
+.song-info h5 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+header .Song_side nav .user {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+header .Song_side nav .user img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 2px 2px 8px #121213;
+}
+/* Phần chữ và khung ở giữa */
+header .Song_side .content {
+  width: 90%;
+  height: 30%;
+  /* border: 1px solid #fff; */
+  margin: auto;
+  padding-top: 20px;
+}
+header .Song_side .content h1 {
+  font-size: 35px;
+  font-weight: 800;
+  font-style: italic;
+}
+.rainbow-text {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  animation: colorChange 10s infinite, bounce 1s infinite alternate;
+  display: inline-block;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #fff;
+  }
+  14% {
+    color: #36e2ec;
+  }
+  28% {
+    color: #a75d9d;
+  }
+  42% {
+    color: #2a3d50;
+  }
+  57% {
+    color: #5adae0;
+  }
+  71% {
+    color: #a4a8b4;
+  }
+  85% {
+    color: rgb(100, 93, 161);
+  }
+  100% {
+    color: rgb(21, 78, 31);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.rainbow-text:hover {
+  animation: bounceHover 0.3s infinite alternate;
+}
+
+@keyframes bounceHover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+header .Song_side .content p {
+  font-size: 11px;
+  font-weight: 400;
+  color: #fff;
+  margin: 5px;
+}
+header .Song_side .content .buttons {
+  margin-top: 15px;
+}
+header .Song_side .content .buttons a {
+  width: 130px;
+  height: 30px;
+  border: 2px solid #36e2ec;
+  outline: none;
+  border-radius: 20px;
+  background: #5adae0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block; /* Để thẻ a có thể có kích thước như button */
+  text-align: center; /* Căn giữa nội dung */
+  line-height: 30px; /* Căn giữa theo chiều dọc */
+  transition: 0.3s linear; /* Sửa từ 0.3 thành 0.3s để có đơn vị thời gian */
+  text-decoration: none; /* Bỏ gạch chân */
+  font-weight: 600;
+}
+
+/* phần di chuột mờ cái play và flow */
+header .Song_side .content .buttons a:hover {
+  background: none;
+  color: #36e2ec;
+}
+
+/* phần chữ play */
+header .Song_side .content .buttons a:nth-child(2) {
+  background: none;
+  color: #36e2ec;
+}
+header .Song_side .content .buttons a:nth-child(2):hover {
+  background: #36e2ec;
+  color: #fff;
+}
+
+/* Khối nhậc phố biến */
+header .Song_side .popular_song {
+  width: 90%;
+  height: auto;
+  margin-left: 0px;
+  /* cần sửa để  */
+  margin-top: 30px;
+  /* border: 1px solid #fff; */
+}
+header .Song_side .popular_song .h4 {
+  display: flex;
+  align-items: center;
+  /* làm cho 2 cái icon di chuyển ra góc phải */
+  justify-content: space-between;
+}
+header .Song_side .popular_song .h4 .bi {
+  color: #a4a8b4;
+  cursor: pointer;
+  transform: 0.3s linear;
+}
+header .Song_side .popular_song .h4 .bi:hover {
+  color: #fff;
+}
+header .Song_side .popular_song .pop_song {
+  width: 100%;
+  height: 150px;
+  /* phút số 2:02:05 */
+  margin-top: 10px;
+  display: flex;
+  /* border: 1px solid #37b8be; */
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+header .Song_side .popular_song .pop_song::-webkit-scrollbar {
+  display: none;
+}
+header .Song_side .popular_song .pop_song li {
+  min-width: 100px;
+  height: 140px;
+  margin-right: -10px;
+  list-style-type: none;
+  transition: 0.3s linear;
+}
+header .Song_side .popular_song .pop_song li:hover {
+  background: rgb(105, 105, 170, 0.1);
+}
+
+/* phần phải xem và sửa lại nhiều 2:06:16 */
+header .Song_side .popular_song .pop_song li .img_play {
+  position: relative;
+  width: 85px;
+  height: 105px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+header .Song_side .popular_song .pop_song li .img_play img {
+  width: 100%;
+  height: 100%;
+}
+header .Song_side .popular_song .pop_song li .img_play i.bi {
+  position: absolute;
+  /* /phần đã sửa icon play */
+  margin-left: 35px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s linear;
+  opacity: 0;
+}
+header .Song_side .popular_song .pop_song li:hover .img_play i.bi {
+  opacity: 1;
+}
+header .Song_side .popular_song .pop_song li h5 {
+  padding: 5px 0px 0px 5px;
+  line-height: 15px;
+  font-size: 10px;
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+header .Song_side .popular_song .pop_song li h5 .subtitle {
+  font-size: 9px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #4c5262;
+}
+header .Song_side .content .popular_artists {
+  width: 90%;
+  height: auto;
+  /* border: 1px solid #36e2ec; */
+  margin-top: 0px;
+}
+
+header .Song_side .popular_artists .h4 {
+  display: flex;
+  align-items: center;
+  /* làm cho 2 cái icon di chuyển ra góc phải */
+  justify-content: space-between;
+}
+header .Song_side .popular_artists .h4 .bi {
+  color: #a4a8b4;
+  cursor: pointer;
+  transform: 0.3s linear;
+}
+header .Song_side .popular_artists .h4 .bi:hover {
+  color: #fff;
+}
+header .Song_side .popular_artists .item {
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+  display: flex;
+  /* border: 1px solid #37b8be; */
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+header .Song_side .popular_artists .item::-webkit-scrollbar {
+  display: none;
+}
+header .Song_side .popular_artists .item li {
+  list-style-type: none;
+  position: relative;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 20px;
+  cursor: pointer;
+}
+header .Song_side .popular_artists .item li img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Phần QH thêm */
